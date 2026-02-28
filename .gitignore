@@ -1,0 +1,6 @@
+node_modules/
+dist/
+server/cortina.db
+server/cortina.db-wal
+server/cortina.db-shm
+.DS_Store

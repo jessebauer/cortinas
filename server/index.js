@@ -1,10 +1,17 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import db from './database.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Serve static frontend files in production
+app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 // ===================== PRODUCTS =====================
 app.get('/api/products', (req, res) => {
@@ -330,7 +337,12 @@ app.get('/api/dashboard', (req, res) => {
     });
 });
 
+// SPA catch-all: serve index.html for any non-API route
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+});
+
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Cortina API rodando em http://localhost:${PORT}`);
 });

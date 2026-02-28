@@ -11,13 +11,13 @@ const navItems = [
     { path: '/whatsapp', label: 'WhatsApp', icon: MessageCircle, badgeType: 'whatsapp' },
     { section: 'Comercial' },
     { path: '/quotes', label: 'Orçamentos', icon: FileText },
-    { path: '/orders', label: 'Pedidos', icon: ClipboardList },
+    { path: '/orders', label: 'Pedidos', icon: ClipboardList, hideOnMobile: true },
     { path: '/clients', label: 'Clientes', icon: Users },
     { section: 'Catálogo' },
     { path: '/products', label: 'Produtos', icon: Package },
     { section: 'Gestão' },
-    { path: '/calendar', label: 'Agenda', icon: CalendarDays },
-    { path: '/reports', label: 'Relatórios', icon: BarChart3 },
+    { path: '/calendar', label: 'Agenda', icon: CalendarDays, hideOnMobile: true },
+    { path: '/reports', label: 'Relatórios', icon: BarChart3, hideOnMobile: true },
 ]
 
 export default function Sidebar() {
@@ -65,7 +65,7 @@ export default function Sidebar() {
                     return (
                         <div
                             key={item.path}
-                            className={`sidebar-link ${isActive ? 'active' : ''}`}
+                            className={`sidebar-link ${isActive ? 'active' : ''} ${item.hideOnMobile ? 'hide-on-mobile' : ''}`}
                             onClick={() => navigate(item.path)}
                         >
                             <Icon size={18} />
